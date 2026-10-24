@@ -37,7 +37,7 @@ APP_VERSION = "FORMAL_PRE_TRAINING_READY_V3"
 
 
 DEFAULT_WEIGHTS_CANDIDATES = [
-    "construction-safety-compliance-cv-system-main/models/ppe_yolov8n_100e_reasonable_best.pt",
+    "models/ppe_yolov8n_100e_reasonable_best.pt",
     "runs/train/ppe_yolov8n_100e_reasonable/weights/best.pt",
     "runs/train/ppe_yolov8n_100e_auto_batch/weights/best.pt",
     "runs/train/ppe_yolov8n_100e_fast/weights/best.pt",
