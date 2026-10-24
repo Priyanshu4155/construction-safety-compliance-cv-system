@@ -1,427 +1,206 @@
-# Construction Safety Compliance CV System
+# 🏗️ Construction Safety Compliance CV System
 
-An AI-powered computer vision system for construction-site safety monitoring.  
-The system uses YOLOv8 object detection to identify PPE items, workers, construction objects, safety violations, fall events, and zone-based risks. It also includes rule-based compliance checking, risk scoring, reporting, sample visualization, and a Streamlit dashboard.
+An AI-powered computer vision application that helps monitor construction-site safety by detecting personal protective equipment (PPE), identifying potential safety violations, and generating risk assessments through an interactive Streamlit dashboard.
 
----
+## 🚀 Overview
 
-## Overview
+Construction sites require consistent safety monitoring to reduce workplace hazards and improve compliance with personal protective equipment requirements.
 
-Construction sites require continuous safety monitoring to reduce accidents and improve worker compliance with personal protective equipment requirements.
+This project uses **YOLOv8, Python, OpenCV, and Streamlit** to analyze images and videos, detect safety-related objects, apply rule-based compliance checks, calculate risk scores, and generate readable safety reports.
 
-This project provides a complete computer vision prototype that can detect safety-related objects and violations, analyze risk levels, generate reports, and display results through an interactive dashboard.
+## ✨ Key Features
 
-The system is designed as a formal portfolio-level AI project using Python, YOLOv8, OpenCV, Streamlit, and rule-based safety logic.
+- **PPE Detection:** Detect hardhats, safety vests, masks, gloves, and goggles.
+- **Violation Detection:** Identify missing PPE using object-detection results and configurable safety rules.
+- **Risk Assessment:** Calculate risk scores and categorize safety conditions.
+- **Fall Detection:** Support fall-event detection and critical safety alerts.
+- **Zone-Based Monitoring:** Evaluate safety conditions in configured work zones.
+- **Worker Tracking:** Support worker-related tracking functionality.
+- **Multiple Input Modes:** Analyze images, uploaded videos, and camera snapshots; live-camera functionality is also provided.
+- **Interactive Dashboard:** Review detection results, compliance status, risk scores, and safety reports.
+- **Model Training and Evaluation:** Includes scripts for training, evaluation, and project health checks.
 
----
+## 🛠️ Technology Stack
 
-## Main Features
-
-- PPE and construction-object detection using YOLOv8.
-- Detection of hardhats, safety vests, masks, gloves, goggles, ladders, people, safety cones, and fall events.
-- Rule-based PPE compliance checking.
-- Risk scoring for detected safety violations.
-- Critical emergency handling for fall-detection events.
-- Worker tracking support.
-- Zone-based safety checking.
-- Image prediction support.
-- Camera snapshot support.
-- Video upload processing.
-- Live camera dashboard mode.
-- Sample prediction visualization.
-- Daily safety report generation.
-- GPU preflight checks before training.
-- Healthcheck script for validating project readiness.
-- Reasonable-time YOLO training script with auto batch, AMP, checkpoint saving, and resume support.
-
----
-
-## Project Structure
-
-```text
-construction-safety-compliance-cv-system/
-│
-├── app/
-│   └── streamlit_app.py
-│
-├── assets/
-│   ├── sample_images/
-│   └── sample_predictions/
-│
-├── configs/
-│   ├── ppe_yolov8.yaml
-│   ├── risk_rules.yaml
-│   └── zones.example.json
-│
-├── models/
-│   └── ppe_yolov8n_100e_reasonable_best.pt
-│
-├── scripts/
-│   ├── check_dataset.py
-│   ├── check_env.py
-│   ├── check_training_progress.sh
-│   ├── create_sample_predictions.py
-│   ├── diagnose_website.py
-│   ├── final_pre_training_repair.sh
-│   ├── generate_daily_report.py
-│   ├── gpu_preflight.py
-│   ├── project_healthcheck.py
-│   ├── regenerate_visible_samples.py
-│   ├── run_website.sh
-│   ├── train_reasonable_gpu.sh
-│   └── train_strong_yolov8.sh
-│
-├── src/
-│   ├── compliance_rules.py
-│   ├── contextual_risk.py
-│   ├── detection.py
-│   ├── evaluate.py
-│   ├── fall_alerts.py
-│   ├── predict.py
-│   ├── realtime.py
-│   ├── reporting.py
-│   ├── risk_scoring.py
-│   ├── train.py
-│   ├── utils.py
-│   ├── video_processor.py
-│   ├── visualization.py
-│   ├── worker_tracking.py
-│   └── zone_safety.py
-│
-├── tests/
-│   ├── test_compliance_rules.py
-│   ├── test_contextual_risk.py
-│   ├── test_risk_scoring.py
-│   └── test_zone_safety.py
-│
-├── .streamlit/
-│   └── config.toml
-│
-├── README.md
-├── TRAINING_SUMMARY.md
-├── requirements.txt
-└── .gitignore
-```
-
----
-
-## Dataset
-
-The project expects a YOLOv8-format dataset.
-
-Expected dataset path:
-
-```text
-/workspace/Personal Protective Equipment - Combined Model.v1i.yolov8
-```
-
-YOLO dataset configuration file:
-
-```text
-configs/ppe_yolov8.yaml
-```
-
-Dataset splits used during training:
-
-| Split | Images |
-|---|---:|
-| Train | 30,765 |
-| Validation | 8,814 |
-| Test | 4,423 |
-
-Number of classes:
-
-```text
-14
-```
-
----
-
-## Detection Classes
-
-```text
-0  Fall-Detected
-1  Gloves
-2  Goggles
-3  Hardhat
-4  Ladder
-5  Mask
-6  NO-Gloves
-7  NO-Goggles
-8  NO-Hardhat
-9  NO-Mask
-10 NO-Safety Vest
-11 Person
-12 Safety Cone
-13 Safety Vest
-```
-
----
-
-## Final Trained Model
-
-A lightweight trained YOLOv8n model is included for demo usage:
-
-```text
-models/ppe_yolov8n_100e_reasonable_best.pt
-```
-
-The original local training output path was:
-
-```text
-runs/train/ppe_yolov8n_100e_reasonable/weights/best.pt
-```
-
----
-
-## Training Configuration
-
-The final model was trained using the following setup:
-
-| Setting | Value |
+| Technology | Purpose |
 |---|---|
-| Model | YOLOv8n |
-| Image size | 512 |
-| Epochs | 100 |
-| Batch | Auto batch |
-| Device | NVIDIA GeForce RTX 3070 Ti Laptop GPU |
-| AMP | Enabled |
-| Cache | Disk |
-| Resume support | Enabled |
-| Checkpoint saving | Enabled |
+| Python | Application development |
+| YOLOv8 (Ultralytics) | Object detection |
+| PyTorch | Deep-learning inference and training |
+| OpenCV | Image and video processing |
+| Streamlit | Interactive web dashboard |
+| Pandas and PyYAML | Data and configuration handling |
+| Pytest | Automated testing |
 
-Training command:
+## 🧠 Detection Classes
 
-```bash
-bash scripts/train_reasonable_gpu.sh 0
-```
-
-If training is interrupted, run the same command again. The script will resume from `last.pt` when available.
-
----
-
-## Evaluation Results
-
-### Validation Set
-
-| Metric | Value |
-|---|---:|
-| mAP50 | 0.7664 |
-| mAP50-95 | 0.4949 |
-| mAP75 | 0.5273 |
-
-### Test Set
-
-| Metric | Value |
-|---|---:|
-| mAP50 | 0.7763 |
-| mAP50-95 | 0.4993 |
-| mAP75 | 0.5262 |
-
----
-
-## Class-Level Notes
-
-The model performs well on several important safety-related classes, including:
+The model configuration defines 14 classes:
 
 - Fall-Detected
 - Gloves
 - Goggles
 - Hardhat
 - Ladder
-- Person
-- NO-Goggles
+- Mask
 - NO-Gloves
+- NO-Goggles
 - NO-Hardhat
+- NO-Mask
+- NO-Safety Vest
+- Person
+- Safety Cone
+- Safety Vest
 
-The weakest class is:
+## 📊 Model Evaluation
+
+The existing training summary reports the following results:
+
+| Metric | Validation | Test |
+|---|---:|---:|
+| mAP@50 | 76.64% | 77.63% |
+| mAP@50–95 | 49.49% | 49.93% |
+| mAP@75 | 52.73% | 52.62% |
+
+**Model configuration:** YOLOv8n, 512-pixel image size, 100 epochs.
+
+These are the reported model evaluation results, not a guarantee of real-world safety performance. Detection quality may vary with lighting, camera angles, occlusion, and construction-site conditions.
+
+## 📁 Project Structure
 
 ```text
-NO-Safety Vest
+construction-safety-compliance-cv-system/
+├── app/
+│   └── streamlit_app.py
+├── assets/
+│   ├── sample_images/
+│   └── sample_predictions/
+├── configs/
+│   ├── ppe_yolov8.yaml
+│   ├── risk_rules.yaml
+│   └── zones.example.json
+├── docs/
+├── models/
+├── notebooks/
+├── scripts/
+├── src/
+│   ├── compliance_rules.py
+│   ├── contextual_risk.py
+│   ├── detection.py
+│   ├── fall_alerts.py
+│   ├── predict.py
+│   ├── reporting.py
+│   ├── risk_scoring.py
+│   ├── video_processor.py
+│   ├── visualization.py
+│   ├── worker_tracking.py
+│   └── zone_safety.py
+├── tests/
+├── requirements.txt
+├── TRAINING_SUMMARY.md
+├── README.md
+└── .gitignore
 ```
 
-This class can be improved in future work using better class balancing, additional targeted samples, or a stronger model version.
+## ⚙️ Installation and Setup
 
----
-
-## Pre-Training Check
-
-Before training, run:
+### 1. Clone the repository
 
 ```bash
-python scripts/gpu_preflight.py --require-gpu --matmul
-python scripts/project_healthcheck.py
+git clone https://github.com/rajanish-8/construction-safety-compliance-cv-system.git
+cd construction-safety-compliance-cv-system
 ```
 
-Expected successful output:
+### 2. Create a virtual environment
+
+**Windows PowerShell:**
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+If PowerShell blocks activation, use the appropriate execution-policy guidance for your environment, or activate the environment through your preferred Python tool.
+
+### 3. Install dependencies
+
+```bash
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+Use a compatible Python and PyTorch environment for your installed Ultralytics version.
+
+### 4. Configure the trained model
+
+The application requires compatible trained YOLO weights. The `.pt` model files are excluded from Git, so obtain the trained weights separately or train the model yourself.
+
+Place the model at the path expected by the application, for example:
 
 ```text
-GPU status: READY
-Dataset status: OK
-Project healthcheck passed
+models/ppe_yolov8n_100e_reasonable_best.pt
 ```
 
----
+If your model is stored elsewhere, update the **Weights path** in the dashboard or the relevant model configuration.
 
-## Running the Streamlit Dashboard
+### 5. Run the application
 
-Start the dashboard:
+From the repository root:
 
 ```bash
-bash scripts/run_website.sh
+python -m streamlit run app/streamlit_app.py
 ```
 
-Open:
+Open the local URL displayed in your terminal, normally:
 
 ```text
 http://localhost:8501
 ```
 
-The dashboard supports:
+## 🧪 Run Tests
 
-- Image analysis
-- Camera snapshot analysis
-- Video upload analysis
-- Live camera mode
-- Sample prediction viewing
-- Safety report viewing
-
----
-
-## Running Evaluation
-
-Evaluate on the validation set:
+Run the automated test suite:
 
 ```bash
-python src/evaluate.py \
-  --weights models/ppe_yolov8n_100e_reasonable_best.pt \
-  --split val
+python -m pytest
 ```
 
-Evaluate on the test set:
-
-```bash
-python src/evaluate.py \
-  --weights models/ppe_yolov8n_100e_reasonable_best.pt \
-  --split test
-```
-
----
-
-## Regenerating Sample Predictions
-
-```bash
-python scripts/regenerate_visible_samples.py \
-  --weights models/ppe_yolov8n_100e_reasonable_best.pt \
-  --num-samples 12 \
-  --conf 0.25 \
-  --device 0
-```
-
-Generated samples are saved in:
-
-```text
-assets/sample_predictions/
-```
-
----
-
-## Project Healthcheck
-
-Run the full project healthcheck:
+Run the project health check:
 
 ```bash
 python scripts/project_healthcheck.py
 ```
 
-This checks:
+The test suite includes coverage for compliance rules, risk scoring, contextual risk, and zone safety.
 
-- Required project files
-- Python package availability
-- Python syntax compilation
-- Dataset structure
-- Test suite
+## 🏋️ Model Training
 
----
-
-## Testing
-
-Run tests:
+To train using the project's GPU training script in a compatible Bash environment:
 
 ```bash
-pytest
+bash scripts/train_reasonable_gpu.sh 0
 ```
 
-The current test suite covers:
+Training requires the configured YOLO-format dataset and a compatible GPU environment. Review the dataset configuration and training script before running it.
 
-- Compliance rules
-- Risk scoring
-- Contextual risk logic
-- Zone safety logic
+## 🔒 Safety Disclaimer
 
----
+This project is a **safety-assistance prototype**, not a certified safety system. It does not replace qualified safety officers, site inspections, official procedures, or emergency-response protocols. All detected hazards should be verified by responsible personnel.
 
-## Requirements
+## 🔮 Future Improvements
 
-Install dependencies:
+- Improve detection of underrepresented PPE classes.
+- Evaluate performance across more construction environments.
+- Enhance fall-event confirmation and worker tracking.
+- Add database-backed safety history.
+- Integrate notification and alert services.
+- Support Docker-based deployment and an API backend.
 
-```bash
-pip install -r requirements.txt
-```
+## 👨‍💻 Author
 
-Core dependencies include:
+**Rajanish Kumrawat**
 
-- Python
-- PyTorch
-- Ultralytics YOLO
-- OpenCV
-- Streamlit
-- Pandas
-- PyYAML
-- Pillow
-- Matplotlib
-- Pytest
+GitHub: [@rajanish-8](https://github.com/rajanish-8)
 
 ---
 
-## Safety Disclaimer
-
-This system is a safety-assistance prototype.  
-It supports visual inspection, safety monitoring, and reporting, but it does not replace official site supervision, certified safety procedures, or professional safety officers.
-
----
-
-## Future Improvements
-
-Possible future improvements include:
-
-- Stronger model training using YOLOv8s or YOLOv8m.
-- Better class balancing for weak classes such as `NO-Safety Vest`.
-- More construction-site data from different lighting and camera angles.
-- Improved worker re-identification.
-- More advanced fall-event confirmation logic.
-- FastAPI backend integration.
-- Docker deployment.
-- Database storage for historical reports.
-- Real-time alert notifications.
-- Role-based dashboard access.
-
----
-
-## Repository Status
-
-This repository includes:
-
-- Clean project structure.
-- Trained YOLOv8n model.
-- Streamlit dashboard.
-- Safety compliance logic.
-- Risk scoring logic.
-- Worker tracking and zone safety modules.
-- Training and evaluation scripts.
-- Sample prediction outputs.
-- Project healthcheck and tests.
-
-```text
-Status: GitHub-ready portfolio project
-```
+*Built as an AI and computer vision project to support construction-site safety monitoring and compliance analysis.*
