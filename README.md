@@ -195,6 +195,19 @@ This project is a **safety-assistance prototype**, not a certified safety system
 - Integrate notification and alert services.
 - Support Docker-based deployment and an API backend.
 
+
+## Screenshots
+
+### Application Dashboard
+![Application Dashboard](assets/screenshots/dashboard.png)
+
+### PPE Detection Results
+![PPE Detection Results](assets/screenshots/detection-result.png)
+
+### Compliance Report
+![Compliance Report](assets/screenshots/compliance-report.png)
+
+
 ## 👨‍💻 Author
 
 **Rajanish Kumrawat**
