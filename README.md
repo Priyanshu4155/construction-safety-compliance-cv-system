@@ -210,7 +210,7 @@ This project is a **safety-assistance prototype**, not a certified safety system
 
 ## 👨‍💻 Author
 
-**Rajanish Kumrawat**
+**Priyanshu Tiwari**
 
 GitHub: [@rajanish-8](https://github.com/rajanish-8)
 
